@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:700');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.page {
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grey-box {
+  width: calc(100% - 90px);
+  height: calc(100% - 90px);
+  background: #e3e5e6;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+}
+
+.red-half {
+  background-color: #e05353;
+  height: 100%;
+  transition: 0.7s ease-in-out;
+  position: relative;
+}
+
+h1 {
+  margin: 0;
+}
+
+.wid-25 {
+  width: 25%;
+}
+
+.home-center-container {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(65%, -50%);
+}
+.home-img {
+  height: 492px;
+  width: 599px;
+  position: relative;
+  z-index: 1;
+}
+
+.home-img-container {
+  height: 470px;
+  width: 580px;
+  overflow: hidden;
+  position: relative;
+  z-index: 5;
+  animation-name: homeImgShadow;
+  animation-duration: 2s;
+  animation-fill-mode:forwards;
+}
+
+@keyframes homeImgShadow {
+  from {box-shadow: 0 0 0 rgba(0,0,0,0);}
+  to {box-shadow: 2px 2px 10px rgba(40,40,40,0.4);}
+}
+
+.home-img-cover {
+  background-color: #c53c3b;
+  height: 492px;
+  width: 599px;
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.home-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 60px;
+  color: #292929;
+}
+
+.ht-1 {
+  
+}
+.ht-1 {
+  
+}
+
+.home-title-container {
+  z-index: 10;
+  position: absolute;
+  top: 29%;
+  left: -30%;
+}
+
+.view-portfolio-btn {
+  padding: 15px 35px;
+  background-color: #ca4544;
+  color: #fff;
+  position: absolute;
+  z-index: 15;
+  right: 0;
+  transform: translateX(50%);
+  bottom: 100px;
+  font-size: 18px;
+  border: 0;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  outline: none;
+  animation-name: portfolioBtn;
+  animation-duration: 2.5s;
+  animation-fill-mode:forwards;
+}
+
+.view-portfolio-btn:hover {
+  box-shadow: 2px 2px 5px rgba(40,40,40,0.6);
+  transition: 0.2s ease-in-out;
+}
+
+@keyframes portfolioBtn {
+  0% {
+    opacity: 0;
+    transform: translate(50%, 50%);
+  }
+  33% {
+    opacity: 0;
+    transform: translate(50%, 50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(50%, 0);
+  }
+}
+
+.home-subtitle {
+  /* font-family: 'Lato', sans-serif; */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  color: #292929;
+}

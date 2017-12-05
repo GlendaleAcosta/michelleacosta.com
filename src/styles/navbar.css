@@ -1,0 +1,45 @@
+.navbar-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45px;
+  /* background-color: blue; */
+  width: 100%;
+  z-index: 20;
+  padding-left: 45px;
+  padding-right: 45px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transform: translateY(-100%);
+  animation-name: navbar;
+  animation-duration: 0.5s;
+  animation-delay: 1.3s;
+  animation-fill-mode:forwards;
+}
+
+@keyframes navbar {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
+
+.navbar-home {
+  color: #292929;
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 35px;
+  margin-right: 10px;
+}
