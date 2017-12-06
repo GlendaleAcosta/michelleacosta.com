@@ -17,7 +17,7 @@ const nav = [
   'Introduction',
   'Illustration Templates',
   'Noteworthy Designs',
-  'FLATS',
+  'Technical Sketches',
   'Hand Sketches',
   'Graphic Screens & More',
   'Accessories',

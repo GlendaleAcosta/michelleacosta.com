@@ -87,6 +87,7 @@ font-family: 'Fauna One', serif; */
   }
 }
 
+
 .current-slide-bg {
   width: 85%;
   height: 85%;
@@ -108,6 +109,15 @@ font-family: 'Fauna One', serif; */
   100% { 
     opacity: 1;
     transform: translate(5%, -2.5%);
+  }
+}
+
+@media (min-width: 1281px) {
+  .current-slide {
+    height: 75%;
+  }
+  .current-slide-bg {
+    height: 75%;
   }
 }
 
@@ -236,14 +246,16 @@ font-family: 'Fauna One', serif; */
 
 .slide {
   width: calc(100% / 6);
-  height: 80%;
+  height: 70%;
   background-color: rgba(40,40,40,0.6);
   margin-right: 10px;
   box-sizing: border-box;
   position: relative;
   cursor: pointer;
   box-shadow: 2px 2px 10px rgba(40,40,40,0.5);
+
 }
+
 
 .slide:hover {
   box-shadow: none;

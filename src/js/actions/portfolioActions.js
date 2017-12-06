@@ -38,8 +38,8 @@ const pages = [
     ]
   },
   {
-    name: 'FLATS',
-    DescriptionTitle: 'FLATS',
+    name: 'Technical Sketches',
+    DescriptionTitle: 'Technical Sketches',
     Description: 'Rendered in Illustrator for Levis.',
     images: [
       'FLATS/LevisDetailedJacket.jpg',
