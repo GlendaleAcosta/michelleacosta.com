@@ -9,8 +9,11 @@ class CurrentSlide extends Component {
    render() {
     const { currentSlide } = this.props.portfolioReducer;
     const slideSrc = require(`images/${currentSlide}`);
+    const style = {
+      opacity: this.props.portfolioReducer.fetchingSlides ? 0 : 1,
+    };
     return (
-      <div className="current-slide-container">
+      <div style={style} className="current-slide-container">
         <img alt={'idk'} src={slideSrc} className="current-slide" />
 
         <div className="current-slide-bg"/>

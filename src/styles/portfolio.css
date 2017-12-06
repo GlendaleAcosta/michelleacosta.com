@@ -50,6 +50,7 @@ font-family: 'Fauna One', serif; */
   flex-direction: column;
   justify-content: center;
   padding: 20px;
+  transition: 0.3s ease-in-out;
 }
 
 .current-slide-container {
@@ -58,6 +59,7 @@ font-family: 'Fauna One', serif; */
   display: flex;
   align-items: center;
   position: relative;
+  transition: 0.3s ease-in-out;
 }
 
 .current-slide {
