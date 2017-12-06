@@ -27,7 +27,6 @@ class Home extends Component {
         // transform: 'translateY(0)',
       }
     };
-    console.log(window);
     window.addEventListener('wheel', this.handleScroll);
   }
 
@@ -62,7 +61,6 @@ class Home extends Component {
   }
 
   renderHomeImgCover = (interpolatingStyles) => {
-    console.log(testImg);
     const styles = {
       WebkitTransform: `translateY(${interpolatingStyles.y}%)`,
       transform: `translateY(${interpolatingStyles.y}%)`,

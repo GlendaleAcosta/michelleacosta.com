@@ -1,154 +1,90 @@
 import React, { Component } from 'react';
-import { changeSlide } from 'actions/portfolioActions';
+import { changeSlide, slidesFetched } from 'actions/portfolioActions';
 import 'styles/portfolio.css';
 import { StaggeredMotion, spring } from 'react-motion';
 
-const slides = [
-  1, 2, 3, 4, 5, 6
-]
 
-const defaultStyles = [
-  { opacity: 0, y: 40 },
-  { opacity: 0, y: 40 },
-  { opacity: 0, y: 40 },
-  { opacity: 0, y: 40 },
-  { opacity: 0, y: 40 },
-  { opacity: 0, y: 40 },
-]
 
 class BottomSlider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      renderSlides: false,
-      defaultStyles: [
-        { opacity: 0, y: 40 },
-        { opacity: 0, y: 40 },
-        { opacity: 0, y: 40 },
-        { opacity: 0, y: 40 },
-        { opacity: 0, y: 40 },
-      ]
+      i: 0,
+      j: 5,
+      slideContainerPosition: 'translateX(0)',
     };
-    const that = this;
-    setTimeout(() => {
-      that.setState({
-        renderSlides: true,
-      })
-    }, 700)
-    console.log(props);
   }
 
   changeSlide = (slideNum) => { 
+    const { currentPage } = this.props.portfolioReducer;
     this.props.dispatch(changeSlide(slideNum));
+    if (currentPage.images.length > 6) {
+      this.moveSlider(slideNum);
+    }
   }
 
-  // renderSlides = (interpolatingStyles) => {
-    // const { currentPage, currentSlide } = this.props.portfolioReducer;
-    // const slides = currentPage.images;
+  moveSlider = (slideNum) => {
+    const { currentPage } = this.props.portfolioReducer;
+    const slideLength = currentPage.images.length;
+    const { i , j} = this.state;
+    if (slideNum >= (j-2) && this.state.j < (slideLength - 1)) {
+      // transform right
+      const val = -(i+1) * 10;
+      this.setState({
+        i: i + 1,
+        j: j + 1,
+        slideContainerPosition: `translateX(${val}%)`,
+      });
+    } else if (slideNum <= (i+2) && this.state.i > 0) {
+      // transform left
+      const val = -(i-1) * 10;
+      this.setState({
+        i: i - 1,
+        j: j - 1,
+        slideContainerPosition: `translateX(${val}%)`,
+      });
+    }
+  }
 
-  //   return slides.map((slide, i) => {
-      // const slideSrc = require(`images/${slide}`);
-      // if (currentSlide === slide) {
-      //   return (
-      //     <div onClick={() => this.changeSlide(i)} className="slide">
-      //       <img
-      //         className="slide-img"
-      //         alt={'idk'}
-      //         src={slideSrc}
-      //         key={slide}
-      //       />
-      //     </div>
-      //   );
-      // }
-      // return (
-      //   <div onClick={() => this.changeSlide(i)} className="slide">
-      //     <img
-      //       className="slide-img"
-      //       alt={'idk'}
-      //       src={slideSrc}
-      //       key={slide}
-      //     />
-          // <div className="slide-img-bg" />
-      //   </div>
-      // );
-  //   }
-  //   );
-  // }
-  renderSlides = (interpolatingStyles) => {
-    const { currentPage, currentSlide } = this.props.portfolioReducer;
-    const slides = currentPage.images;  
+  renderSlides = () => {
+    const { currentPage } = this.props.portfolioReducer;
+    const slides = currentPage.images;
+    return slides.map((slide, i) => {
+      const slideSrc = require(`images/${slide}`);
       return (
-        <div className="slide-container">
-          {
-            interpolatingStyles.map((style, i) => {
-              if (i + 1 > slides.length)
-                return null;
-              const slideSrc = require(`images/${slides[i]}`);
-              const slide = slides[i];
-              const styles = {
-                opacity: style.opacity,
-                WebkitTransform: `translateY(${style.y}%)`,
-                transform: `translateY(${style.y}%)`,
-              };
-              if (currentSlide === slide) {
-                return (
-                  <div key={slide} style={styles} onClick={() => this.changeSlide(i)} className="slide">
-                    <img
-                      className="slide-img"
-                      alt={'idk'}
-                      src={slideSrc}
-                    />
-                  </div>
-                );
-              }
-              return (
-                <div key={slide} style={styles} onClick={() => this.changeSlide(i)} className="slide">
-                  <img
-                    className="slide-img"
-                    alt={'idk'}
-                    src={slideSrc}
-                  />
-                  <div className="slide-img-bg" />
-                </div>
-              );
-            })
-          }
+        <div onClick={() => this.changeSlide(i)} className="slide">
+          <img className="slide-img" src={slideSrc} alt='idk' />
+          {this.renderSlideBG(slide)}
         </div>
       )
+    })
   }
 
-  renderStyles = (prevInterpolatedStyles) => {
-    return prevInterpolatedStyles.map((_, i) => {
-      return i === 0
-      ? {opacity: spring(1), y: spring(0, {stiffness: 300, damping: 60})}
-      : {
-        opacity: spring(prevInterpolatedStyles[i - 1].opacity),
-        y: spring(prevInterpolatedStyles[i-1].y)
-      }
-    });
-  }
-
-  waitToRenderSlides = () => {
-    
-    if (this.state.renderSlides) {
-      return (
-        <StaggeredMotion
-          defaultStyles={defaultStyles}
-          styles={this.renderStyles}
-        >
-          {this.renderSlides}
-        </StaggeredMotion>
-      )
-    } else {
+  renderSlideBG = (slide) => {
+    const { currentSlide } = this.props.portfolioReducer;
+    if (currentSlide !== slide) {
+      return <div className="slide-img-bg" />;
+    } else{
       return null;
     }
   }
 
+
   render() {
+    const { currentPage } = this.props.portfolioReducer;
+    const style = {
+      width: `calc((100%/6) * ${currentPage.images.length})`,
+      transform: currentPage.images.length > 6 ? this.state.slideContainerPosition : 'translateX(0)',
+      opacity: this.props.portfolioReducer.fetchingSlides ? 0 : 1,
+    };
+
     return (
-      this.waitToRenderSlides()
-    );
+      <div style={style} className="slide-container">
+        {this.renderSlides()}
+      </div>
+    )
   }
 }
+
 
 export default BottomSlider;

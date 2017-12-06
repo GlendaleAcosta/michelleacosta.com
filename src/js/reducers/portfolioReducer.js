@@ -1,18 +1,16 @@
 export default function reducer(state = {
   currentPage: {
-    name: 'Illustration Templates',
-    DescriptionTitle: 'Illustration Templates',
-    // Description: `My name is Michelle Acosta Deardorff. I have worked in the Apparel industry for over 8 years working my way from a Design Assistant to a Designer position. My experiences include Childrenswear, Juniors, Women's Tops, Costumes, and some Accessories (including shoes). Along with designing apparel, I have also had the opportunity to create Graphic Tees, Embroideries. I am proficient in Illustrator and Photoshop. I work very well with others and am willing to learn.`,
-    Description: 'Sketch renderings using Illustrator and Photoshop for Knitworks, Levis, and Disguise.',
+    name: 'Introduction',
+    DescriptionTitle: 'Introduction',
+    Description: "My name is Michelle Acosta-Deardorff, have worked in the Apparelindustry for over 8 years working my way from a Design Assistant to a Designer position. My experiences indude Childrenswear, Juniors, Women's Tops, Costumes and some Accessories including shoes. Along with designing apparel, I have also had the opportunity to create Graphic Screens,Textiles and Embroderies, lamproficientin illustrator and Photoshop, work well with others and am willing to learn and expand my knowledge in my skills and the industry.",
     images: [
-      'illustrationTemplates/EnvyUs.jpg',
-      'illustrationTemplates/LevisLiberty.jpg',
-      'illustrationTemplates/StonyLeggings.jpg',
-      'illustrationTemplates/StonySkirtSets.jpg',
-      'illustrationTemplates/TwilightSparkle.jpg',
+      'NotableWorks/about1.jpg',
+      'NotableWorks/about2.jpg',
     ]
   },
-  currentSlide: 'illustrationTemplates/EnvyUs.jpg',
+  currentSlide: 'NotableWorks/about1.jpg',
+  fetchingSlides: false,
+  fetchedSlides: true,
 }, action) {
   switch (action.type) {
     case 'CHANGE_SLIDE': {
@@ -24,6 +22,20 @@ export default function reducer(state = {
         currentSlide: action.payload.images[0],
         currentPage: action.payload
       };
+    }
+    case 'FETCH_SLIDES': {
+      return {
+        ...state,
+        fetchingSlides: true,
+        fetchedSlides: false,
+      }
+    }
+    case 'SLIDES_SUCCESSFULLY_FETCHED': {
+      return {
+        ...state,
+        fetchingSlides: false,
+        fetchedSlides: true,
+      }
     }
     default: return state;
   }

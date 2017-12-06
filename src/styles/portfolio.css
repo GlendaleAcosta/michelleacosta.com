@@ -12,6 +12,7 @@ font-family: 'Fauna One', serif; */
   animation-duration: 0.8s;
   animation-fill-mode:forwards;
   position: relative;
+  overflow: hidden;
 }
 
 @keyframes portfolioSectionAnimation {
@@ -213,6 +214,22 @@ font-family: 'Fauna One', serif; */
   width: 100%;
   align-items: center;
   justify-content: center;
+  min-width: 100%;
+  transition: 0.3s ease-in-out;
+  animation-name: slideContainerAnim;
+  animation-duration: 1.6s;
+}
+
+@keyframes slideContainerAnim {
+  0%  { opacity: 0; }
+  50%  { 
+    opacity: 0;
+    transform: translate(-40px,40px)
+  }
+  100% { 
+    opacity: 1;
+    transform: translate(0,0)
+  }
 }
 
 .slide {

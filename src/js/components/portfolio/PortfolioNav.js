@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { changePage } from 'actions/portfolioActions';
+import { changePage, fetchSlides, slidesFetched } from 'actions/portfolioActions';
 import { StaggeredMotion, spring } from 'react-motion'
 import 'styles/portfolio.css';
 
@@ -9,13 +9,17 @@ const defaultStyles = [
   {opacity: 0, x: -35},
   {opacity: 0, x: -35},
   {opacity: 0, x: -35},
+  {opacity: 0, x: -35},
+  {opacity: 0, x: -35},
 ];
 
 const nav = [
+  'Introduction',
   'Illustration Templates',
+  'Noteworthy Designs',
   'FLATS',
   'Hand Sketches',
-  'Graphic Screens',
+  'Graphic Screens & More',
   'Accessories',
 ]
 
@@ -39,7 +43,14 @@ class PortfolioNav extends Component {
     this.setState({
       selectedNav: page,
     })
-    this.props.dispatch(changePage(page));
+    this.props.dispatch(fetchSlides());
+    setTimeout(() => {
+      this.props.dispatch(changePage(page));
+    }, 300)
+    setTimeout(() => {
+      this.props.dispatch(slidesFetched());
+    }, 600)
+      
   }
 
   renderStyles = (prevInterpolatedStyles) => {
